@@ -59,3 +59,24 @@ class Student(models.Model):
 
     def __str__(self):
         return self.full_name
+
+
+class Parent(models.Model):
+    full_name = models.CharField("ФИО", max_length=150)
+    phone = models.CharField("Телефон", max_length=20, blank=True)
+    telegram_id = models.BigIntegerField(
+        "Telegram ID", null=True, blank=True, unique=True
+    )
+    children = models.ManyToManyField(
+        Student,
+        related_name="parents",
+        verbose_name="Дети",
+    )
+
+    class Meta:
+        verbose_name = "Родитель"
+        verbose_name_plural = "Родители"
+        ordering = ["full_name"]
+
+    def __str__(self):
+        return self.full_name

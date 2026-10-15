@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Institution, Student, StudyGroup
+from .models import Institution, Parent, Student, StudyGroup
 
 
 @admin.register(Institution)
@@ -20,3 +20,10 @@ class StudentAdmin(admin.ModelAdmin):
     list_display = ["full_name", "group", "is_active"]
     list_filter = ["group__institution", "group", "is_active"]
     search_fields = ["full_name"]
+
+
+@admin.register(Parent)
+class ParentAdmin(admin.ModelAdmin):
+    list_display = ["full_name", "phone"]
+    search_fields = ["full_name", "phone"]
+    filter_horizontal = ["children"]

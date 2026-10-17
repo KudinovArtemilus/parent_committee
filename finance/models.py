@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import F
 
 
 class Institution(models.Model):
@@ -117,6 +118,7 @@ class Event(models.Model):
                 condition=models.Q(rounding_step__gt=0),
                 name="event_rounding_step_positive",
             ),
+            models.Q(from_piggy_bank__lte=F("total_cost")),
         ]
 
     def __str__(self):

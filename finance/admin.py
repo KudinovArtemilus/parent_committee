@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Institution, Parent, Student, StudyGroup
+from .models import Event, Institution, Parent, Student, StudyGroup
 
 
 @admin.register(Institution)
@@ -27,3 +27,10 @@ class ParentAdmin(admin.ModelAdmin):
     list_display = ["full_name", "phone"]
     search_fields = ["full_name", "phone"]
     filter_horizontal = ["children"]
+
+
+@admin.register(Event)
+class EventAdmin(admin.ModelAdmin):
+    list_display = ["title", "group", "date", "total_cost", "from_piggy_bank"]
+    list_filter = ["group__institution", "group"]
+    search_fields = ["title"]
